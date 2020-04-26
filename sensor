@@ -1,0 +1,32 @@
+int calibrationTime = 30;
+int pir_pin = 3;
+int buzzer_pin = 11;
+void setup()
+{
+pinMode(pir_pin, INPUT);
+pinMode(buzzer_pin, OUTPUT);
+digitalRead(pir_pin) == LOW;
+Serial.begin(9600);
+//Dar al sensor algún tiempo para su calibrado
+Serial.print("calibrando sensor ");
+for(int i = 0; i < calibrationTime; i++){
+Serial.print(".");
+delay(1000);
+}
+Serial.println(" echo");
+Serial.println("SENSOR ACTIVO");
+}
+void loop()
+{
+if(digitalRead(pir_pin) == HIGH)
+{
+digitalWrite(buzzer_pin, HIGH);
+Serial.println("¡Intrusos!");
+}
+else
+{
+digitalWrite(buzzer_pin, LOW);
+Serial.println("Modo vigilante");
+}
+delay(77);
+}
